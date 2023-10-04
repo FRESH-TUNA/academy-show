@@ -4,9 +4,10 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import project.academyshow.controller.request.TutorRequest;
 
 import javax.persistence.*;
-import java.util.List;
+import java.util.stream.Collectors;
 
 @Entity
 @Builder
@@ -49,5 +50,24 @@ public class TutorInfo {
 
     public BatchLikes getBatchLikes() {
         return batchLikes;
+    }
+
+    public void edit(TutorRequest tutorRequest) {
+        // 연령, 과목
+        String educations = String.join(",", tutorRequest.getEducations());
+
+        String subjects = tutorRequest.getSubjects().stream()
+                .map(Subject::getName)
+                .collect(Collectors.joining(","));
+
+        this.educations = educations;
+        this.subjects = subjects;
+
+        // 기본정보
+        this.title = tutorRequest.getTitle();
+        this.phone = tutorRequest.getPhone();
+        this.introduce = tutorRequest.getIntroduce();
+        this.scholarship = tutorRequest.getScholarship();
+        this.certification = tutorRequest.getCertification();
     }
 }

@@ -1,0 +1,48 @@
+version: "3"
+
+services:
+  db:
+    env_file:
+      - .db.academy.env
+    image: mariadb:10.6.4
+    container_name: db.academy
+    networks:
+      - academy
+    volumes:
+      - db.academy:/var/lib/mysql
+    logging:
+      driver: "json-file"
+      options:
+        max-file: "5"
+        max-size: "100m"
+    command: --character-set-client-handshake=FALSE
+  app:
+    volumes:
+      - ./application.yaml:/academy/application.yaml
+      - static.academy:/static
+    image: lunacircle4/app.acaedmy:1.0.0
+    container_name: app.academy
+    networks:
+      - academy
+    depends_on:
+      - db
+    deploy:
+      restart_policy:
+        condition: on-failure
+        delay: 5s
+        max_attempts: 3
+    logging:
+      driver: "json-file"
+      options:
+        max-file: "5"
+        max-size: "100m"
+
+networks:
+  academy:
+    name: academy
+
+volumes:
+  db.academy:
+    name: db.academy
+  storage.academy:
+    name: static.academy

@@ -6,6 +6,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
+import project.academyshow.controller.request.AcademyInfo;
 import project.academyshow.controller.request.ReviewRequest;
 import project.academyshow.controller.request.SearchRequest;
 import project.academyshow.controller.response.*;
@@ -85,6 +86,14 @@ public class AcademyController {
         }
         else
             return ApiResponse.RESOURCE_NOT_FOUND_RESPONSE;
+    }
+
+    @PutMapping("/academy/{id}")
+    public ApiResponse<?> updateAcademy(@PathVariable("id") Long id,
+                                        @AuthenticationPrincipal CustomUserDetails userDetails,
+                                        @RequestBody AcademyInfo academyInfo) {
+        academyService.edit(id, userDetails, academyInfo);
+        return ApiResponse.SUCCESS_NO_DATA_RESPONSE;
     }
 
     @GetMapping("/academy/{id}/reviews")

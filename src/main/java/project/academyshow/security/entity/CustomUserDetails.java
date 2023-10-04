@@ -87,4 +87,8 @@ public class CustomUserDetails implements OAuth2User, UserDetails, OidcUser {
     public String getName() {
         return null;
     }
+
+    public boolean isSameUser(String username) {
+        return this.username.equals(username);
+    }
 }

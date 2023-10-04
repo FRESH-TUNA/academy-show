@@ -11,6 +11,8 @@ import java.util.stream.Collectors;
 
 @Data
 public class TutorRequest {
+    private String title;
+    private String introduce;
     private List<String> educations;
     private List<Subject> subjects;
     private String scholarship;
@@ -26,6 +28,8 @@ public class TutorRequest {
 
         return TutorInfo.builder()
                 .member(member)
+                .title(title)
+                .introduce(introduce)
                 .scholarship(scholarship)
                 .certification(certification)
                 .educations(educations)

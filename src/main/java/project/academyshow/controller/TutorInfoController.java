@@ -8,6 +8,7 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 import project.academyshow.controller.request.ReviewRequest;
 import project.academyshow.controller.request.SearchRequest;
+import project.academyshow.controller.request.TutorRequest;
 import project.academyshow.controller.response.ApiResponse;
 import project.academyshow.controller.response.ReferenceLikesStatistics;
 import project.academyshow.controller.response.ReviewStatistics;
@@ -57,6 +58,14 @@ public class TutorInfoController {
         }
         else
             return ApiResponse.RESOURCE_NOT_FOUND_RESPONSE;
+    }
+
+    @PutMapping("/tutor/{id}")
+    public ApiResponse<?> tutor(@PathVariable("id") Long id,
+                                @AuthenticationPrincipal CustomUserDetails userDetails,
+                                @RequestBody TutorRequest tutorRequest) {
+        tutorInfoService.edit(id, userDetails, tutorRequest);
+        return ApiResponse.SUCCESS_NO_DATA_RESPONSE;
     }
 
     @GetMapping("/tutor/{id}/reviews")
@@ -123,6 +132,7 @@ public class TutorInfoController {
         private Long id;
         private String name;
         private String title;
+        private String certification;
         private String profile;
         private String introduce;
         private String area;
@@ -139,6 +149,7 @@ public class TutorInfoController {
             id = tutorInfo.getId();
             name = tutorInfo.getMember().getName();
             title = tutorInfo.getTitle();
+            certification = tutorInfo.getCertification();
             profile = tutorInfo.getMember().getProfile();
             introduce = tutorInfo.getIntroduce();
             area = tutorInfo.getArea();

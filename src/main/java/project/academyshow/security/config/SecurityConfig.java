@@ -83,6 +83,7 @@ public class SecurityConfig {
                     .antMatchers(HttpMethod.GET, "/api/posts/**").permitAll()
                     .antMatchers(HttpMethod.GET, "/api/tutors/**").permitAll()
                     .antMatchers(HttpMethod.GET, "/api/tutor/**").permitAll()
+                    .antMatchers(HttpMethod.GET, "/api/reviews/**").permitAll()
                     .anyRequest().authenticated()
                 .and()
                     /* OAuth2 설정 */

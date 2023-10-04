@@ -14,6 +14,7 @@ public class AcademyResponse {
     private String name;
     private String profile;
     private String introduce;
+    private String postcode;
     private String roadAddress;
     private String jibunAddress;
     private String subAddress;
@@ -21,6 +22,7 @@ public class AcademyResponse {
     private List<String> subjects;
     private List<String> educations;
     private boolean shuttle;
+    private String businessRegistration;
     private ReferenceLikesStatistics upStatistics;
 
     public AcademyResponse(Academy academy, ReferenceLikesStatistics upStatistics) {
@@ -31,14 +33,20 @@ public class AcademyResponse {
         roadAddress = academy.getRoadAddress();
         jibunAddress = academy.getJibunAddress();
         subAddress = academy.getSubAddress();
+        postcode = academy.getPostcode();
         subjects = Arrays.stream(academy.getSubjects().split(",")).collect(Collectors.toList());
         educations = Arrays.stream(academy.getEducations().split(",")).collect(Collectors.toList());
         shuttle = academy.isShuttle();
         phone = academy.getPhone();
+        businessRegistration = academy.getBusinessRegistration();
         this.upStatistics = upStatistics;
     }
 
     public static AcademyResponse of(Academy academy, ReferenceLikesStatistics upStatistics) {
         return new AcademyResponse(academy, upStatistics);
+    }
+
+    public static AcademyResponse of(Academy academy) {
+        return of(academy, null);
     }
 }
