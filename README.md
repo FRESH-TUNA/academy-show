@@ -7,6 +7,8 @@
 
 웹 서비스를 통해 학원 및 과외를 홍보하거나 정보를 찾을 수 있고, 리뷰와 교육정보들을 확인할 수 있습니다.
 
+- [데모 바로가기](https://academy.freshtuna.store/)
+- 데모계정: user1(id), user1(password) 
 <br>
 
 백엔드 서버(API)와 클라이언트(Vue.js)로 구성되어 있습니다.

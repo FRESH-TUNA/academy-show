@@ -58,6 +58,7 @@ public class CustomOAuth2UserService extends DefaultOAuth2UserService {
                 .providerType(providerType)
                 .username(savedMember.get().getUsername())
                 .attributes(oAuth2User.getAttributes())
+                .role(savedMember.get().getRole())
                 .build();
     }
 
