@@ -44,7 +44,7 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
-                    .cors()
+                .cors()
                 .and()
                     /* session 사용하지 않음 (STATELESS) */
                     .sessionManagement()
